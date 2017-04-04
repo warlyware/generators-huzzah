@@ -7,8 +7,11 @@ function* generator() {
     console.log('r');
 }
 
-var foobar = generator();
-for (let letter of foobar) {
-    console.log(letter);
+var gen = generator();
+while (true) {
+    let item = gen.next();
+    if (item.done) {
+        break;
+    }
+    console.log(item.value);
 }
-
