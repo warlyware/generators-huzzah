@@ -13,13 +13,16 @@ function answer() {
 }
 
 function* chat() {
-    while (true) {
-        let question = yield '[Genie] ' + answer();
-        console.log(question);
-    }
+    yield '[Me] Will I ever meet that one person?';
+    yield '[Me] Are you there God?';
 }
 
-var gen = chat();
-gen.next();
-console.log(gen.next('[Me] Will I ever something something?').value);
-console.log(gen.next('[Me] Are you even listening?').value);
+let gen = chat();
+while (true) {
+    let question = gen.next();
+    if (question.done) {
+        break;
+    }
+    console.log(question.value);
+    console.log('[Genie] ' + answer());
+}
