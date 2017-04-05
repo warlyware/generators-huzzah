@@ -12,17 +12,21 @@ function answer() {
     return answers[Math.floor(Math.random() * answers.length)];
 }
 
-function* chat() {
+function* questions() {
     yield '[Me] Will I ever meet that one person?';
     yield '[Me] Are you there God?';
 }
 
-let gen = chat();
-while (true) {
-    let question = gen.next();
-    if (question.done) {
-        break;
+function genie(questions) {
+    let gen = questions();
+    while (true) {
+        let question = gen.next();
+        if (question.done) {
+            break;
+        }
+        console.log(question.value);
+        console.log('[Genie] ' + answer());
     }
-    console.log(question.value);
-    console.log('[Genie] ' + answer());
 }
+
+genie(questions);
